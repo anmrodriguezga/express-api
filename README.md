@@ -1,20 +1,71 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Node Microservices Project
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This project is a Node.js-based microservices architecture utilizing Redis for caching, a relational database for persistent storage, and is designed for deployment on Azure resources. It also includes support for [Dev Containers](https://containers.dev/) to streamline development environments.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Features
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- **Microservices Architecture**: Modular and scalable Node.js services.
+- **Redis Integration**: Fast in-memory caching for improved performance.
+- **Relational Database**: Persistent data storage (e.g., PostgreSQL, MySQL).
+- **Azure Deployment**: Ready for deployment using Azure App Service, Azure Database, and Azure Cache for Redis.
+- **Dev Containers**: Consistent development environments using Visual Studio Code Dev Containers.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Prerequisites
+
+- Node.js (v16+)
+- Docker (required for Dev Containers and optional for local development)
+- Azure CLI (for deployment)
+- Redis server
+- Relational database server (PostgreSQL/MySQL)
+
+## Getting Started
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/node-microservices.git
+    cd node-microservices
+    ```
+
+2. **Open in Dev Container (Recommended):**
+    - Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+    - Open the project folder in VS Code and select **"Reopen in Container"** when prompted.
+
+3. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+4. **Configure environment variables:**
+    - Copy `.env.example` to `.env` and update with your Redis and database credentials.
+
+5. **Run services locally:**
+    ```bash
+    npm run dev
+    ```
+
+## Deployment on Azure
+
+1. **Provision Azure Resources:**
+    - Azure App Service for each microservice
+    - Azure Database for PostgreSQL/MySQL
+    - Azure Cache for Redis
+
+2. **Configure environment variables in Azure Portal.**
+
+3. **Deploy using Azure CLI:**
+    ```bash
+    az webapp up --name <app-name> --resource-group <resource-group>
+    ```
+
+## Folder Structure
+
+```
+/services         # Individual microservices
+/common           # Shared utilities and modules
+/config           # Configuration files
+/.devcontainer    # Dev Container configuration
+```
+
+## License
+
+MIT
