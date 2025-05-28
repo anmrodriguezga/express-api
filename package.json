@@ -1,0 +1,19 @@
+{
+  "name": "microservices",
+  "version": "1.0.0",
+  "description": "This project is a Node.js-based microservices architecture utilizing Redis for caching, a relational database for persistent storage, and is designed for deployment on Azure resources. It also includes support for [Dev Containers](https://containers.dev/) to streamline development environments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://amrodriguezg@dev.azure.com/amrodriguezg/Corredores/_git/node-microservices"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
