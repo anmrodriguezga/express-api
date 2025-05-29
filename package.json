@@ -4,7 +4,7 @@
   "description": "This project is a Node.js-based microservices architecture utilizing Redis for caching, a relational database for persistent storage, and is designed for deployment on Azure resources. It also includes support for [Dev Containers](https://containers.dev/) to streamline development environments.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
