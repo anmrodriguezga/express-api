@@ -20,11 +20,12 @@ async function get(tabla, id) {
   return collection.filter(item => item.id === id)[0] || null;
 }
 
-async function upsert(tabla, id, data) {
-  db[collection].push(data);
+async function upsert(tabla, data) {
+  db[tabla].push(data);
 }
 
 async function remove(tabla, id) {
+  db[tabla] = db[tabla].filter(item => item.id !== id);
   return true;
 }
 
