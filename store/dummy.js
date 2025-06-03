@@ -25,9 +25,13 @@ async function upsert(tabla, data) {
     db[tabla] = [];
   }
 
-  db[tabla].push(data);
-
-  console.log(db);
+  if (await get(tabla, data.id) !== null) {
+    console.log('Actualizando', data);
+    db[tabla] = db[tabla].map(item => (item.id === data.id ? data : item));
+  } else {
+    console.log('Insertando', data);
+    db[tabla].push(data);
+  }
 }
 
 async function remove(tabla, id) {

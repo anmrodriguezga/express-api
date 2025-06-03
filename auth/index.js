@@ -14,7 +14,11 @@ function verifyToken(token) {
 const check = {
     own: function(req, owner) {
         const decoded = decodeHeader(req);
-        console.log(decoded);
+        console.log("Decodificado: ", decoded);
+
+        if (decoded.id !== owner) {
+            throw new Error('No tienes permiso para realizar esta accion');
+        }
     },
 }
 
@@ -41,5 +45,6 @@ function decodeHeader(req) {
 }
 
 module.exports = {
-    sign
+    sign,
+    check
 };
