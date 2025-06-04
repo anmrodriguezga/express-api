@@ -47,6 +47,73 @@ function list(table) {
     });
 }
 
+function get(table, id) {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE id = '${id}';`, (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            if (results.length === 0) {
+                return resolve(null);
+            }
+            resolve(results[0]);
+        });
+    });
+}
+
+async function upsert(table, data) {
+    let retrievedUser = await get(table, data.id);
+    return new Promise((resolve, reject) => {
+        if (retrievedUser !== null) {
+            console.log('Updating');
+            connection.query(`UPDATE ${table} SET ? WHERE id = ?`, [data, data.id], (error, results) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(results.affectedRows);
+            });
+        } else {
+            console.log('Inserting');
+            connection.query(`INSERT INTO ${table} SET ?`, data, (error, results) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(results.insertId);
+        });
+    }});
+}
+
+function remove(table, id) {
+    return new Promise((resolve, reject) => {
+        connection.query(`DELETE FROM ${table} WHERE id = ?`, [id], (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(results.affectedRows);
+        });
+    });
+}
+
+function query(table, query) {
+    return new Promise((resolve, reject) => {
+        const keys = Object.keys(query);
+        if (keys.length === 0) {
+            return resolve([]);
+        }
+        const key = keys[0];
+        connection.query(`SELECT * FROM ${table} WHERE ${key} = ?`, [query[key]], (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(results[0]);
+        });
+    });
+}
+
 module.exports = {
     list,
+    get,
+    upsert,
+    remove,
+    query,
 }

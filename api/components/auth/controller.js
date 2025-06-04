@@ -11,6 +11,8 @@ module.exports = (injectedStore) => {
 
     async function login(username, password) {
         const data = await store.query(TABLA, { username: username });
+        console.log("password: ", password, " data.password: ", data.password);
+
 
         return bcrypt.compare(password, data.password)
             .then((sonIguales) => {
@@ -36,7 +38,6 @@ module.exports = (injectedStore) => {
         if (data.password) {
             authData.password = await bcrypt.hash(data.password, 5);
         }
-        console.log(authData);
 
         return store.upsert(TABLA, authData);
     }

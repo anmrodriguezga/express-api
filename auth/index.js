@@ -16,6 +16,7 @@ const check = {
     own: function(req, owner) {
         const decoded = decodeHeader(req);
         console.log("Decodificado: ", decoded);
+        console.log("Owner: ", owner, ", Decoded ID: ", decoded.id);
 
         if (decoded.id !== owner) {
             throw error('No tienes permiso para hacer esto', 401);
