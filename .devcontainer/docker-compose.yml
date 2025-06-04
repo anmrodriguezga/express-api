@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+    container_name: node_devcontainer
+    volumes:
+      - ..:/workspace:cached
+    command: >
+      sh -c "sleep infinity &&
+            cd /workspace &&
+            npm ci"
+    network_mode: service:db
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-db-data:

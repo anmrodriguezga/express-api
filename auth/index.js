@@ -25,11 +25,11 @@ const check = {
 
 function getToken(authorization) {
     if (!authorization) {
-        throw new Error('No viene token');
+        throw error('No viene token', 401);
     }
     
     if (authorization.indexOf('Bearer ') === -1) {
-        throw new Error('Formato invalido');
+        throw error('Formato invalido', 401);
     }
     
     let token = authorization.replace('Bearer ', '');
