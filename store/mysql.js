@@ -62,7 +62,8 @@ function get(table, id) {
 }
 
 async function upsert(table, data) {
-    let retrievedUser = await get(table, data.id);
+    let retrievedUser = data.id ? await get(table, data.id) : null;
+    console.log('Retrieved user:', retrievedUser);
     return new Promise((resolve, reject) => {
         if (retrievedUser !== null) {
             console.log('Updating');
@@ -70,7 +71,7 @@ async function upsert(table, data) {
                 if (error) {
                     return reject(error);
                 }
-                resolve(results.affectedRows);
+                resolve(results);
             });
         } else {
             console.log('Inserting');
@@ -78,7 +79,8 @@ async function upsert(table, data) {
                 if (error) {
                     return reject(error);
                 }
-                resolve(results.insertId);
+                console.log('Insert results:', results);
+                resolve(results);
         });
     }});
 }
@@ -89,7 +91,7 @@ function remove(table, id) {
             if (error) {
                 return reject(error);
             }
-            resolve(results.affectedRows);
+            resolve(results);
         });
     });
 }
