@@ -112,6 +112,24 @@ function query(table, query) {
     });
 }
 
+function query(table, query, join) {
+    let joinQuery = '';
+    if (join) {
+        const joinTable = Object.keys(join)[0];
+        const joinColumn = join[joinTable];
+        joinQuery = `JOIN ${joinTable} ON ${table}.${joinColumn} = ${joinTable}.id`;
+    }
+
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} ${joinQuery}  WHERE  ${table}.?`, query, (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(results || null);
+        });
+    });
+}
+
 module.exports = {
     list,
     get,
