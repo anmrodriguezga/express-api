@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "start": "node api/index.js",
-    "serve": "npx nodemon api/index.js"
+    "serve_api": "npx nodemon api/index.js",
+    "serve_sql": "npx nodemon mysql/index.js"
   },
   "repository": {
     "type": "git",
